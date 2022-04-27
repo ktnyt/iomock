@@ -21,7 +21,7 @@ var writerTests = []struct {
 }{
 	{
 		name: "Writer (success)",
-		w: NewWriter(func(p []byte) (int, error) {
+		w: Writer(func(p []byte) (int, error) {
 			return len(p), nil
 		}),
 		actions: []writeAction{
@@ -30,7 +30,7 @@ var writerTests = []struct {
 	},
 	{
 		name: "Writer (error)",
-		w: NewWriter(func(p []byte) (int, error) {
+		w: Writer(func(p []byte) (int, error) {
 			return 0, errWrite
 		}),
 		actions: []writeAction{

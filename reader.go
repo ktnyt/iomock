@@ -7,11 +7,6 @@ import (
 // Reader represents a mocked Read call.
 type Reader func(p []byte) (int, error)
 
-// NewReader returns a new mocked io.Reader.
-func NewReader(mock Reader) Reader {
-	return mock
-}
-
 // Read simulates a Read call by using the provided mock function.
 func (read Reader) Read(p []byte) (int, error) {
 	return read(p)

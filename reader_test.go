@@ -23,7 +23,7 @@ var readerTests = []struct {
 }{
 	{
 		name: "Reader (success)",
-		r: NewReader(func(p []byte) (int, error) {
+		r: Reader(func(p []byte) (int, error) {
 			return copy(p, []byte("foo")), nil
 		}),
 		actions: []readAction{
@@ -32,7 +32,7 @@ var readerTests = []struct {
 	},
 	{
 		name: "Reader (error)",
-		r: NewReader(func(p []byte) (int, error) {
+		r: Reader(func(p []byte) (int, error) {
 			return 0, errRead
 		}),
 		actions: []readAction{
@@ -60,8 +60,8 @@ var readerTests = []struct {
 		},
 	},
 	{
-		name: "MockReader.ErrOnByte",
-		r: NewReadMocker(NewReader(func(p []byte) (int, error) {
+		name: "MockReader.ErrOnByte (internal Reader error)",
+		r: NewReadMocker(Reader(func(p []byte) (int, error) {
 			return 0, io.EOF
 		})).ErrOnByte(2, errRead),
 		actions: []readAction{
